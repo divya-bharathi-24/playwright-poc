@@ -28,7 +28,7 @@ test('Go to cart using header', async ({ page }) => {
   const header = new Header(page);
 
   // login (for now directly)
-  await page.goto('https://www.saucedemo.com/');
+  await page.goto(process.env.BASE_URL!);
   await page.fill('#user-name', 'standard_user');
   await page.fill('#password', 'secret_sauce');
   await page.click('#login-button');

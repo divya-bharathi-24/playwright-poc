@@ -16,7 +16,7 @@ import users from '../fixtures/user.json';
 (users as any[]).forEach(user => {
     test.describe(`Tests for ${user.username}`, () => {
         test.beforeEach(async ({ page }) => {
-            await page.goto('https://www.saucedemo.com/');
+            await page.goto(process.env.BASE_URL!);
         });
 
         test(`Valid login - ${user.username}`, async ({ page }) => {

@@ -20,7 +20,7 @@ import { test, expect } from '@playwright/test';
 
 // API Testing with Playwright
 test('simple Get Request', async ({ request }) => {
-  const response = await request.get('https://www.saucedemo.com/');
+  const response = await request.get(process.env.BASE_URL!);
   expect(response.status()).toBe(200);
   const data = await response.text();
   console.log(data);
