@@ -17,6 +17,8 @@ import { test, expect } from '@playwright/test';
 //   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 // });
 
+
+// API Testing with Playwright
 test('simple Get Request', async ({ request }) => {
   const response = await request.get('https://www.saucedemo.com/');
   expect(response.status()).toBe(200);

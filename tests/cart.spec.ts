@@ -20,6 +20,8 @@ import { Header } from '../pages/components/header';
 //   await cartPage.verifyProductInCart(testData.product);
 // });
 
+
+// resuable method from header component is used to go to cart page instead of writing code in test file. This promotes code reusability and maintainability.
 test('Go to cart using header', async ({ page }) => {
 
   // create object of component

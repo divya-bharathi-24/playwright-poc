@@ -12,22 +12,24 @@ import users from '../fixtures/user.json';
 //   await expect(page).toHaveURL(/inventory/);
 // });
 
+// Data-driven test using multiple users from JSON file
 (users as any[]).forEach(user => {
-    test.beforeEach(async ({ page }) => {
-        await page.goto('https://www.saucedemo.com/');
-    });
+    test.describe(`Tests for ${user.username}`, () => {
+        test.beforeEach(async ({ page }) => {
+            await page.goto('https://www.saucedemo.com/');
+        });
 
-    test(`Valid login - ${user.username}`, async ({ page }) => {
-        await page.fill('#user-name', user.username);
-        await page.fill('#password', user.password);
-        await page.click('#login-button');
-    });
+        test(`Valid login - ${user.username}`, async ({ page }) => {
+            await page.fill('#user-name', user.username);
+            await page.fill('#password', user.password);
+            await page.click('#login-button');
+        });
 
-    test('Invalid login - wrong password', async ({ page }) => {
-        await page.fill('#user-name', user.username);
-        await page.fill('#password', 'wrong_password');
-        await page.click('#login-button');
-        await expect(page.locator('[data-test="error"]')).toBeVisible();
+        test(`Invalid login - wrong password - ${user.username}`, async ({ page }) => {
+            await page.fill('#user-name', user.username);
+            await page.fill('#password', 'wrong_password');
+            await page.click('#login-button');
+            await expect(page.locator('[data-test="error"]')).toBeVisible();
+        });
     });
-
 });
