@@ -1,23 +1,18 @@
 import { test as base } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
 
-// define custom fixture type
 type MyFixtures = {
   loggedInPage: any;
 };
 
-// extend Playwright test
 export const test = base.extend<MyFixtures>({
   loggedInPage: async ({ page }: { page: any }, use: (page: any) => Promise<void>) => {
-    
-    // go to site
-    await page.goto('/');
 
-    // login
-    await page.fill('#user-name', 'standard_user');
-    await page.fill('#password', 'secret_sauce');
-    await page.click('#login-button');
+    const loginPage = new LoginPage(page);
 
-    // give logged-in page to test
+    await loginPage.goto();
+    await loginPage.login('standard_user', 'secret_sauce');
+
     await use(page);
   }
 });

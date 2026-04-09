@@ -14,7 +14,7 @@ export class LoginPage {
   }
 
   async goto(): Promise<void> {
-    await this.page.goto(process.env.BASE_URL!);
+    await this.page.goto('/');
   }
 
   async login(username: string, password: string): Promise<void> {

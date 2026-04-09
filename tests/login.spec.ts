@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures/authFixture';
 import { LoginPage } from '../pages/LoginPage';
 import { testData } from '../fixtures/testData';
 import users from '../fixtures/user.json';
@@ -16,7 +16,7 @@ import users from '../fixtures/user.json';
 (users as any[]).forEach(user => {
     test.describe(`Tests for ${user.username}`, () => {
         test.beforeEach(async ({ page }) => {
-            await page.goto(process.env.BASE_URL!);
+            await page.goto('/');
         });
 
         test(`Valid login - ${user.username}`, async ({ page }) => {

@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect} from '../fixtures/authFixture';
 import { LoginPage } from '../pages/LoginPage';
 import { HomePage } from '../pages/HomePage';
 import { CartPage } from '../pages/CartPage';
@@ -22,16 +22,10 @@ import { Header } from '../pages/components/header';
 
 
 // resuable method from header component is used to go to cart page instead of writing code in test file. This promotes code reusability and maintainability.
-test('Go to cart using header', async ({ page }) => {
+test('Go to cart', async ({ loggedInPage }) => {
 
   // create object of component
-  const header = new Header(page);
-
-  // login (for now directly)
-  await page.goto(process.env.BASE_URL!);
-  await page.fill('#user-name', 'standard_user');
-  await page.fill('#password', 'secret_sauce');
-  await page.click('#login-button');
+  const header = new Header(loggedInPage);
 
   // use reusable method
   await header.goToCart();
