@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { defineBddConfig } from 'playwright-bdd';
 
 /**
  * Read environment variables from file.
@@ -8,11 +9,16 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+const testDir = defineBddConfig({
+  features: './features/**/*.feature',
+  steps: ['./steps/**/*.ts', './fixtures/authFixture.ts'],
+});
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir,
   timeout: 30000,
   retries: 1,
   /* Run tests in files in parallel */
